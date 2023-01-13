@@ -42,7 +42,7 @@ computed: {
 <style>
 
 .scrollbar-enabled {
-  height: 250px;
+  height: 300px;
   overflow-y: scroll;
 }
 
