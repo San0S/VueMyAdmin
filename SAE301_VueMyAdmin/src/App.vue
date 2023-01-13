@@ -12,7 +12,7 @@
       <a-menu v-model:selectedKeys="selectedKeys" theme="dark" mode="inline">
 
         <img v-if="collapsed" src="./assets/Vue_js_logo.png" class="vue_logo" alt="">
-        <img v-else src="./assets/log_menu.PNG" class="vue_logo" alt="">
+        <img v-else src="./assets/log_menu.png" class="vue_logo" alt="">
 
         <!-- <div class="databases"> -->
         <a-sub-menu v-for="database in databases" :key="database.Database" v-on:click="showTables(database.Database)">
