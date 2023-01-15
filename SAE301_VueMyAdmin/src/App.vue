@@ -22,7 +22,7 @@
               <span>{{ database.Database }}</span>
             </span>
           </template>
-          <a-menu-item v-for="(table, key) in tables[database.Database]" :key="table[0]" v-on:click="showTableData(table[0]), showStructure(table[0])">
+          <a-menu-item v-for="(table, key) in tables[database.Database]" :key="table[0]" v-on:click="showTableData(table[0]), showStructure(table[0])" class="table">
               <TableOutlined />
               <span>{{ table[0] }}</span>
           </a-menu-item>
@@ -194,26 +194,26 @@ export default defineComponent({
 </script>
 
 <style>
-#components-layout-demo-side .logo {
+/* #components-layout-demo-side .logo {
   height: 32px;
   margin: 16px;
   background: rgba(255, 255, 255, 0.3);
-}
+} */
 
-.site-layout .site-layout-background {
+/* .site-layout .site-layout-background {
   background: #fff;
 }
 [data-theme='dark'] .site-layout .site-layout-background {
   background: #141414;
-}
+} */
 
-#components-layout-demo-custom-trigger .trigger {
+/* #components-layout-demo-custom-trigger .trigger {
   font-size: 18px;
   line-height: 64px;
   padding: 0 24px;
   cursor: all-;
   transition: color 0.3s;
-}
+} */
 
 .ant-menu-item-selected {
     background-color: #41b883 !important;
@@ -232,11 +232,18 @@ export default defineComponent({
 
 }
 
-.databases {
-  overflow: auto;
-  height: 80vh;
+.table {
+  margin-bottom: -1px !important;
+  margin-top: -1px !important;
 }
 
+/* .database {
+  overflow: auto;
+  max-height: 50vh;
+} */
+
+
+/* Tableau */
 
 table {
   border-collapse: collapse;
