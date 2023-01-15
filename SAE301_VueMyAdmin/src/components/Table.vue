@@ -22,7 +22,7 @@ export default {
 props: ['columns', 'rows'],
 
 data: () => ({
-  // rows: [],
+  rows: [],
   nbOfLinesToDisplay: 10
 }),
 
@@ -40,6 +40,16 @@ computed: {
 </script>
 
 <style>
+
+/* table {
+  border-collapse: collapse;
+}
+
+th,
+td {
+  border: 1px solid #ddd;
+  padding: 8px;
+} */
 
 .scrollbar-enabled {
   height: 300px;
