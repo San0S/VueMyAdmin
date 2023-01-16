@@ -63,8 +63,6 @@ export default defineComponent({
     showStructure(tableName) {
       axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
       .then(response => {
-        console.log('API response:', response);
-        console.log('Table data:', response.data);
         this.structureColumns = Object.keys(response.data[0]);
         this.structureRows = response.data;
         this.$emit('changeStructureColumns', this.structureColumns);
@@ -77,8 +75,6 @@ export default defineComponent({
     showTableData(tableName) {
       axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}`)
         .then(response => {
-          console.log('API response:', response);
-          console.log('Table data:', response.data);
           this.tableColumns = Object.keys(response.data[0]);
           this.tableRows = response.data;
           this.currentTable = tableName;
