@@ -5,14 +5,14 @@
       <img v-if="collapsed" src="../assets/Vue_js_logo.png" class="vue_logo" alt="">
       <img v-else src="../assets/log_menu.png" class="vue_logo" alt="">
 
-      <a-sub-menu v-for="database in databases" :key="database.Database" @click="showTables(database.Database)">
+       <a-sub-menu v-for="(database, key1) in databases" :key="key1" @click="showTables(database.Database)">
         <template #title>
           <span>
             <DatabaseOutlined />
             <span>{{ database.Database }}</span>
           </span>
         </template>
-        <a-menu-item v-for="(table, key) in tables[database.Database]" :key="table[0]" @click="showTableData(table[0]), showStructure(table[0])" class="table">
+        <a-menu-item v-for="(table, key2) in tables[database.Database]" :key="key1 * 1000 + key2" @click="showTableData(table[0]), showStructure(table[0])" class="table">
             <TableOutlined />
             <span>{{ table[0] }}</span>
         </a-menu-item>
