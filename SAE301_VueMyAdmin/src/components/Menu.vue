@@ -29,6 +29,8 @@
 import axios from 'axios';
 import { DatabaseOutlined, TableOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
+import { mapState, mapActions } from 'vuex';
+
 
 const API_URL = 'http://localhost/db.php';
 
@@ -54,7 +56,6 @@ export default defineComponent({
     showTables(databaseName) {
       if (this.selectedDatabase != databaseName) {
         this.selectedDatabase = databaseName;
-        // axios.get(`http://localhost/db.php?database=${databaseName}`)
         axios.get(`${API_URL}?database=${databaseName}`)
         .then(response => {
           this.tables[databaseName]= response.data;
@@ -80,7 +81,6 @@ export default defineComponent({
       }
     },
     showStructure(tableName) {
-      // axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
       axios.get(`${API_URL}?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
       .then(response => {
         this.structureColumns = Object.keys(response.data[0]);
@@ -92,14 +92,11 @@ export default defineComponent({
         console.error(error);
       });
     },
-    showTableData(tableName, selectedDatabase) { // On stock le param selectedDatabase
+    showTableData(tableName, selectedDatabase) {
 
-      // Si la bdd actuellement sélectionnée est différente de celle qui vient d'être sélectionnée
-      // = on a choisi une bdd différente et donc on appelle showTables() pour charger les tables de la nouvelle bdd
       if (this.selectedDatabase !== selectedDatabase) {
         this.showTables(selectedDatabase);
       }
-      // axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}`)
       axios.get(`${API_URL}?database=${this.selectedDatabase}&table=${tableName}`)
         .then(response => {
           this.tableColumns = Object.keys(response.data[0]);
