@@ -38,15 +38,12 @@
           
           
           <a-tab-pane key="3" tab="SQL">
-            <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
-              <a-breadcrumb style="margin: 16px 0">
-                <a-breadcrumb-item>Database</a-breadcrumb-item>
-                <a-breadcrumb-item>Table</a-breadcrumb-item>
-              </a-breadcrumb>
-              <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
-                Requête SQL...
-              </div>
-            </a-layout-content>
+            <Requete
+              :columns="structureColumns" 
+              :rows="structureRows"
+              :currentDb="currentDb"
+              :currentTable="currentTable"
+            />
           </a-tab-pane>
         </a-tabs>
       </a-layout-header>  
@@ -60,12 +57,14 @@
 import axios from 'axios';
 import Menu from './components/Menu.vue';
 import Contenu from './components/Contenu.vue';
+import Requete from './components/Requete.vue';
 
 import { defineComponent, ref } from 'vue';
 export default defineComponent({
   components: {
     Menu,
-    Contenu
+    Contenu,
+    Requete
   },
   data() {
     return {

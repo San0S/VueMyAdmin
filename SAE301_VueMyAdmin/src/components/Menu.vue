@@ -40,7 +40,7 @@ export default defineComponent({
     MenuFoldOutlined,
   },
   props: {
-    databases: []
+    databases: Array
   },
   data() {
     return {
@@ -59,7 +59,20 @@ export default defineComponent({
         .then(response => {
           this.tables[databaseName]= response.data;
           this.currentDb = databaseName;
+          this.currentTable = '';
           this.$emit('changeCurrentDB', this.currentDb);
+          this.$emit('changeCurrentTable', this.currentTable);
+
+          // réinitialisation du contenu et de la structure lors du changement de table
+          this.tableColumns = [];
+          this.tableRows = [];
+          this.structureColumns = [];
+          this.structureRows = [];
+          this.$emit('changeTableColumns', this.tableColumns);
+          this.$emit('changeTableRows', this.tableRows);          
+          this.$emit('changeStructureColumns', this.structureColumns);
+          this.$emit('changeStructureRows', this.structureRows);
+
         })
         .catch(error => {
           console.error(error);

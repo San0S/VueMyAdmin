@@ -18,8 +18,8 @@ export default {
         Table,
     },
     props: {
-        columns: [],
-        rows: [],
+        columns: Array,
+        rows: Array,
         currentDb: '',
         currentTable: ''
     }

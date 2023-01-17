@@ -22,7 +22,6 @@ export default {
 props: ['columns', 'rows'],
 
 data: () => ({
-  rows: [],
   nbOfLinesToDisplay: 10
 }),
 
