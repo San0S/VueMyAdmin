@@ -52,9 +52,10 @@ export default defineComponent({
   },
   methods: {
     showTables(databaseName) {
-      this.selectedDatabase = databaseName;
-      // axios.get(`http://localhost/db.php?database=${databaseName}`)
-      axios.get(`${API_URL}?database=${databaseName}`)
+      if (this.selectedDatabase != databaseName) {
+        this.selectedDatabase = databaseName;
+        // axios.get(`http://localhost/db.php?database=${databaseName}`)
+        axios.get(`${API_URL}?database=${databaseName}`)
         .then(response => {
           this.tables[databaseName]= response.data;
           this.currentDb = databaseName;
@@ -63,6 +64,7 @@ export default defineComponent({
         .catch(error => {
           console.error(error);
         });
+      }
     },
     showStructure(tableName) {
       // axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
@@ -122,6 +124,8 @@ export default defineComponent({
 }
 
 .table {
+  padding-bottom: -1px !important;
+  padding-top: -1px !important;
   margin-bottom: -1px !important;
   margin-top: -1px !important;
   padding-left: 32px !important;
