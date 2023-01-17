@@ -1,5 +1,5 @@
 <template>
-    <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff' }">
+    <a-layout-content :style="{ margin: '24px 16px', padding: '24px', background: '#fff'}">
       <!-- <a-breadcrumb style="margin: 16px 0" v-if="currentDb !== ''">
         <a-breadcrumb-item>{{ currentDb }}</a-breadcrumb-item>
         <a-breadcrumb-item>{{ currentTable }}</a-breadcrumb-item>
@@ -11,8 +11,17 @@
 
 
       <div class="inline">
-        <textarea name="" id="SQLrequest" cols="30" rows="10"></textarea>
-
+        <div id="left-part">
+            <textarea name="" cols="30" rows="10"></textarea>
+            <div>
+                <a-button class="ant-button">Select</a-button>
+                <a-button class="ant-button">Insert</a-button>
+                <a-button class="ant-button">Update</a-button>
+                <a-button class="ant-button">Delete</a-button>
+            </div>
+        </div>
+        
+        <div class="container_request" :class="container_request">
         <table class="request-table" v-if="currentDb !== ''">
             <thead>
                 <tr>
@@ -31,8 +40,10 @@
                 </tr>
             </tbody>
         </table>
+        </div>
 
       </div>
+      <a-button type="primary" id="btn-exec">Exécuter</a-button>
 
       <!-- <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
         <Table :columns="columns" :rows="rows"></Table>
@@ -52,19 +63,50 @@ export default {
         tables: Array,
         currentDb: '',
         currentTable: ''
-    }
+    },
+    data: () => ({
+        nbOfLinesToDisplay: 20
+    }),
 
+    computed: {
+        container_request() {
+            if (this.columns.length > this.nbOfLinesToDisplay) {
+                return 'scrollbar-enabled';
+            } else {
+                return 'scrollbar-disabled';
+            }
+        }
+    }
 }
 </script>
   
   
 <style>
 
+h3 {
+    margin-bottom: 30px !important;
+}
+
+.container_request {
+    width: 17%;
+    margin-left: 15%;
+    display: relative;
+    max-height: 250px;
+    /* border-collapse: collapse; */
+    overflow: auto;
+}
+
 .request-table {
     width: 100%;
-    height: 40px;
-    border-collapse: collapse;
-    overflow: scroll;
+}
+
+.scrollbar-enabled {
+  height: 500px;
+  overflow-y: scroll;
+}
+
+.scrollbar-disabled {
+  overflow-y: visible;
 }
 
 .request-table-thead-th {
@@ -81,10 +123,41 @@ export default {
 
 .inline {
     display: flex;
+    max-height: 40vh;
+    margin-bottom: 30px;
 }
 
-#SQLrequest {
+#left-part {
     width: 60%;
+}
+
+textarea {
+    width: 100%;
+    margin-bottom: 20px !important;
+}
+
+.ant-button {
+    margin-right: 20px;
+    border-radius: 7px !important;
+}
+
+.ant-button:hover {
+    color: #41b883 !important;
+    border-color: #41b883 !important;
+}
+
+.ant-button:focus {
+    color: #41b883 !important;
+    border-color: #41b883 !important;
+}
+
+#btn-exec {
+    background-color: #41b883;
+    border-color: #41b883;
+    border-radius: 7px ;
+    height:  40px;
+    font-size: medium;
+    margin-left: 90%;
 }
 
 </style>

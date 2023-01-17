@@ -22,7 +22,7 @@ export default {
 props: ['columns', 'rows'],
 
 data: () => ({
-  nbOfLinesToDisplay: 10
+  nbOfLinesToDisplay: 20
 }),
 
 computed: {
@@ -42,7 +42,7 @@ computed: {
 
 
 .scrollbar-enabled {
-  height: 300px;
+  height: 500px;
   overflow-y: scroll;
 }
 
