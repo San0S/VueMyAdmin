@@ -58,6 +58,7 @@ export default defineComponent({
         axios.get(`${API_URL}?database=${databaseName}`)
         .then(response => {
           this.tables[databaseName]= response.data;
+          this.$emit('changeTables', this.tables[databaseName]);
           this.currentDb = databaseName;
           this.currentTable = '';
           this.$emit('changeCurrentDB', this.currentDb);

@@ -2,7 +2,8 @@
   <a-layout style="min-height: 100vh" has-sider>
 
     <Menu 
-      :databases="databases" 
+      :databases="databases"
+      @changeTables="tables = $event"
       @changeCurrentDB="currentDb = $event" 
       @changeCurrentTable="currentTable = $event"
       @changeTableColumns="tableColumns = $event"
@@ -39,8 +40,8 @@
           
           <a-tab-pane key="3" tab="SQL">
             <Requete
-              :columns="structureColumns" 
-              :rows="structureRows"
+              :tables="tables"
+              :columns="tableColumns"
               :currentDb="currentDb"
               :currentTable="currentTable"
             />
@@ -69,6 +70,7 @@ export default defineComponent({
   data() {
     return {
       databases: [],            // Menu
+      tables: [],
       tableColumns: [],         // Tableau Données
       tableRows: [],            // Tableau Données
       structureColumns: [],     // Tableau Structure
