@@ -29,8 +29,6 @@
 import axios from 'axios';
 import { DatabaseOutlined, TableOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
-import { mapState, mapActions } from 'vuex';
-
 
 const API_URL = 'http://localhost/db.php';
 
