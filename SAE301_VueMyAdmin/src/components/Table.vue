@@ -41,15 +41,6 @@ computed: {
 
 <style>
 
-/* table {
-  border-collapse: collapse;
-}
-
-th,
-td {
-  border: 1px solid #ddd;
-  padding: 8px;
-} */
 
 .scrollbar-enabled {
   height: 300px;

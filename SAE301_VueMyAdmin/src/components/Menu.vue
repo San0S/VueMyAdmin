@@ -12,7 +12,7 @@
             <span>{{ database.Database }}</span>
           </span>
         </template>
-        <a-menu-item v-for="(table, key2) in tables[database.Database]" :key="key1 * 1000 + key2" @click="showTableData(table[0]), showStructure(table[0])" class="table">
+        <a-menu-item v-for="(table, key2) in tables[database.Database]" :key="key1 * 1000 + key2" @click="showTableData(table[0], database.Database), showStructure(table[0], database.Database)" class="table">
             <TableOutlined />
             <span>{{ table[0] }}</span>
         </a-menu-item>
@@ -30,6 +30,8 @@ import axios from 'axios';
 import { DatabaseOutlined, TableOutlined, MenuFoldOutlined, MenuUnfoldOutlined } from '@ant-design/icons-vue';
 import { defineComponent, ref } from 'vue';
 
+const API_URL = 'http://localhost/db.php';
+
 export default defineComponent({
   components: {
     DatabaseOutlined,
@@ -45,12 +47,14 @@ export default defineComponent({
       selectedKeys: ref(['1']),
       collapsed: ref(false),
       tables: [],
+      selectedDatabase: ref(''),
     }
   },
   methods: {
     showTables(databaseName) {
       this.selectedDatabase = databaseName;
-      axios.get(`http://localhost/db.php?database=${databaseName}`)
+      // axios.get(`http://localhost/db.php?database=${databaseName}`)
+      axios.get(`${API_URL}?database=${databaseName}`)
         .then(response => {
           this.tables[databaseName]= response.data;
           this.currentDb = databaseName;
@@ -61,7 +65,8 @@ export default defineComponent({
         });
     },
     showStructure(tableName) {
-      axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
+      // axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
+      axios.get(`${API_URL}?database=${this.selectedDatabase}&table=${tableName}&structure=true`)
       .then(response => {
         this.structureColumns = Object.keys(response.data[0]);
         this.structureRows = response.data;
@@ -72,8 +77,15 @@ export default defineComponent({
         console.error(error);
       });
     },
-    showTableData(tableName) {
-      axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}`)
+    showTableData(tableName, selectedDatabase) { // On stock le param selectedDatabase
+
+      // Si la bdd actuellement sélectionnée est différente de celle qui vient d'être sélectionnée
+      // = on a choisi une bdd différente et donc on appelle showTables() pour charger les tables de la nouvelle bdd
+      if (this.selectedDatabase !== selectedDatabase) {
+        this.showTables(selectedDatabase);
+      }
+      // axios.get(`http://localhost/db.php?database=${this.selectedDatabase}&table=${tableName}`)
+      axios.get(`${API_URL}?database=${this.selectedDatabase}&table=${tableName}`)
         .then(response => {
           this.tableColumns = Object.keys(response.data[0]);
           this.tableRows = response.data;
@@ -112,5 +124,6 @@ export default defineComponent({
 .table {
   margin-bottom: -1px !important;
   margin-top: -1px !important;
+  padding-left: 32px !important;
 }
 </style>
