@@ -14,10 +14,11 @@
         <div id="left-part">
             <textarea name="" cols="30" rows="10" :value="structRequest"></textarea>
             <div>
-                <a-button class="ant-button" @click="btnSelect()">Select</a-button>
-                <a-button class="ant-button" @click="btnInsert()">Insert</a-button>
-                <a-button class="ant-button" @click="btnUpdate()">Update</a-button>
-                <a-button class="ant-button" @click="btnDelete()">Delete</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnSelect()">Select</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnInsert()">Insert</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnUpdate()">Update</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnDelete()">Delete</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable == ''" @click="btnGrant()">Grant</a-button>
             </div>
         </div>
         
@@ -80,6 +81,9 @@ export default {
         },
         btnDelete() {
             this.structRequest = "DELETE FROM ... WHERE ... ;";
+        },
+        btnGrant() {
+            this.structRequest = "GRANT ... ON ... TO {...} [WITH GRANT OPTION]";
         }
 
     },
