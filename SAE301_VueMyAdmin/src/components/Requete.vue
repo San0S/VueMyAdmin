@@ -19,6 +19,7 @@
                 <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnUpdate()">Update</a-button>
                 <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnDelete()">Delete</a-button>
                 <a-button class="ant-button" v-if="currentDb !== '' && currentTable == ''" @click="btnGrant()">Grant</a-button>
+                <a-button class="ant-button" v-if="currentDb !== '' && currentTable == ''" @click="btnCreate()">Create</a-button>
             </div>
         </div>
         
@@ -84,6 +85,9 @@ export default {
         },
         btnGrant() {
             this.structRequest = "GRANT ... ON ... TO {...} [WITH GRANT OPTION]";
+        },
+        btnCreate() {
+            this.structRequest = "CREATE TABLE ... (colonne1 type_donnees, colonne2 type_donnees, ...)";
         }
 
     },
