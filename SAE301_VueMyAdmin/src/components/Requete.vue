@@ -12,7 +12,7 @@
 
       <div class="inline">
         <div id="left-part">
-            <textarea name="" cols="30" rows="10" :value="structRequest"></textarea>
+            <textarea name="" cols="30" rows="10" v-model="structRequest"></textarea>
             <div>
                 <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnSelect()">Select</a-button>
                 <a-button class="ant-button" v-if="currentDb !== '' && currentTable !== ''" @click="btnInsert()">Insert</a-button>
@@ -45,7 +45,7 @@
         </div>
 
       </div>
-      <a-button type="primary" id="btn-exec">Exécuter</a-button>
+      <a-button type="primary" id="btn-exec" @click="execSQLRequest()">Exécuter</a-button>
 
       <!-- <div :style="{ padding: '24px', background: '#fff', minHeight: '360px' }">
         <Table :columns="columns" :rows="rows"></Table>
@@ -88,8 +88,16 @@ export default {
         },
         btnCreate() {
             this.structRequest = "CREATE TABLE ... (colonne1 type_donnees, colonne2 type_donnees, ...)";
-        }
-
+        },
+        // execSQLRequest() {
+        //     const mysql = require('mysql2');
+        //     const connection = mysql.createConnection({
+        //         host: 'localhost',
+        //         user: 'root',
+        //         password: '',
+        //         database: ''
+        //     });
+        // }
     },
     computed: {
         container_request() {
