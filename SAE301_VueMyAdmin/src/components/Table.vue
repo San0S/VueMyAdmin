@@ -9,7 +9,7 @@
       </thead>
       <tbody>
         <tr v-for="row in rows" :key="row.id">
-          <td v-for="cell in row" :key="cell" class="ant-table-tbody-td">{{ cell }}</td>
+          <td v-for="(cell, key) in row" :key="key + ' ' + cell" class="ant-table-tbody-td">{{ cell }}</td>
         </tr>
       </tbody>
     </table>

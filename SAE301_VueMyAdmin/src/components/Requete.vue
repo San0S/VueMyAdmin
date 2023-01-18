@@ -12,12 +12,12 @@
 
       <div class="inline">
         <div id="left-part">
-            <textarea name="" cols="30" rows="10"></textarea>
+            <textarea name="" cols="30" rows="10" :value="structRequest"></textarea>
             <div>
-                <a-button class="ant-button">Select</a-button>
-                <a-button class="ant-button">Insert</a-button>
-                <a-button class="ant-button">Update</a-button>
-                <a-button class="ant-button">Delete</a-button>
+                <a-button class="ant-button" @click="btnSelect()">Select</a-button>
+                <a-button class="ant-button" @click="btnInsert()">Insert</a-button>
+                <a-button class="ant-button" @click="btnUpdate()">Update</a-button>
+                <a-button class="ant-button" @click="btnDelete()">Delete</a-button>
             </div>
         </div>
         
@@ -65,9 +65,24 @@ export default {
         currentTable: ''
     },
     data: () => ({
-        nbOfLinesToDisplay: 20
+        nbOfLinesToDisplay: 20,
+        structRequest: ''
     }),
+    methods: {
+        btnSelect() {
+            this.structRequest = "SELECT ... FROM ... WHERE ... ;";
+        },
+        btnInsert() {
+            this.structRequest = "INSERT INTO ... (...) VALUES (...) ;";
+        },
+        btnUpdate () {
+            this.structRequest = "UPDATE ... SET ... WHERE ... ;";
+        },
+        btnDelete() {
+            this.structRequest = "DELETE FROM ... WHERE ... ;";
+        }
 
+    },
     computed: {
         container_request() {
             if (this.columns.length > this.nbOfLinesToDisplay) {
@@ -75,7 +90,8 @@ export default {
             } else {
                 return 'scrollbar-disabled';
             }
-        }
+        },
+
     }
 }
 </script>
