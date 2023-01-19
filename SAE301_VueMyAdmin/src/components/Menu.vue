@@ -133,10 +133,12 @@ export default defineComponent({
 }
 
 .table {
-  padding-bottom: -1px !important;
-  padding-top: -1px !important;
+  // padding-bottom: -1px !important;
+  // padding-top: -1px !important;
   margin-bottom: -1px !important;
   margin-top: -1px !important;
   padding-left: 32px !important;
+  line-height: 30px !important; 
+  height: 30px !important; 
 }
 </style>
