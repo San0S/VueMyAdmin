@@ -1,12 +1,11 @@
 <template>
   <a-layout style="min-height: 100vh" has-sider>
     <Menu 
-      :databases="databases"
-      @changeTables="tables = $event"
+      :databases="databases" 
       @changeCurrentDB="currentDb = $event" 
       @changeCurrentTable="currentTable = $event"
-      @changeTableColumns="chtc"
-      @changeTableRows="chtr"
+      @changeTableColumns="tableColumns = $event"
+      @changeTableRows="tableRows = $event"
       @changeStructureColumns="structureColumns = $event"
       @changeStructureRows="structureRows = $event"
     />
@@ -92,12 +91,6 @@ export default defineComponent({
         console.error(error);
       });
     },
-    chtc(event) {
-      this.tableColumns = event.map(function (value, index) { return {title: value, dataIndex: value, key: index}});
-    },
-    chtr(event) {
-      this.tableRows = event.map(function (value, index) { value.key=index;return value});
-    }
   },
   created() {
     this.getDatabases()
